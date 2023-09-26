@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-container">
+    
+    <div class="post-text">
+        <h1 class="post-title">"{{ post.title }}" </h1>  
+        <br>
+        <p class="post-content" style="white-space: pre-line">{{ post.content }}</p>
+    </div>
+    <div class="image-grid">
+        {% if post.image_file %}
+          <img src="{{ url_for('static', filename='img/' + post.image_file) }}" alt="screenshot of project within browser">
+        {% endif %}
+    </div>
+    <br><br>
+    <div class="container central">
+        <a class="nav-list-item" href="{{ url_for('projects') }}"> back to projects
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+        </a>
+        &emsp;
+        <a class="nav-list-item" href="{{ url_for('home') }}"> back home
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+              <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+{% endblock content %}
+
+

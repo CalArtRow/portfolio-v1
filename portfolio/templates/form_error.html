@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-container">
+    <h3>{{ error_statement }}</h3>
+    <form id="contact-form" method="post" action="/contact">
+        <label for="email">Email: *</label>
+        <input type="email" id="email" name="email" value="{{ email }}"><br>
+        <label for="message">Message: *</label>
+        <textarea id="message" name="message" value="{{ message }}"></textarea><br>
+        <input class="btn btn-outline-primary" type="submit" value="Submit">
+    </form> 
+
+</div>
+{% endblock content %}

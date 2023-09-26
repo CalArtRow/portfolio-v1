@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="welcome" id="top">
+  <div class="welcome-message">
+    <h1 class="greeting">Hi I'm Cal.</h1>
+    <h1 class="greeting-2">Welcome to My Portfolio.</h1>
+    <p>Thank you for visiting my website. Here you can learn more about me and my work, view my projects, and get in touch with me.</p>
+    <a href="#about" class="btn btn-outline-primary">About</a>
+    <a href="#work" class="btn btn-outline-primary">Work</a>
+    <a href="#projects" class="btn btn-outline-primary">Projects</a>
+    <a href="#contact" class="btn btn-outline-primary">Contact</a>
+    <a href="/static/cv.pdf" target="_blank" class="btn btn-outline-primary">CV</a>
+    <br><br>
+    <svg class="scroll-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+      <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h2>01. About me. </h2>
+  <div class="about-container">
+    <img class="reveal" src="{{ url_for('static', filename='img/' + about.profile_image) }}" alt="Profile picture of Cal">
+    <div class="text-styled">
+      <p class="reveal" style="white-space: pre-line">
+          {{ about.content }}
+      </p>
+    </div>
+  </div>
+  <br>
+  <p class="central reveal">Here are some technologies I have worked with recently:</p>
+  <br>
+  <div class="skills reveal">
+    <img alt="html" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" />
+    <img alt="css" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" />
+    <img alt="python" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-plain-wordmark.svg" />
+    <img alt="javascript" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
+    <img alt="mysql" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg" />
+    <img alt="flask" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original-wordmark.svg" />
+    <img alt="sqlite" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original-wordmark.svg" />
+    <img alt="sqlalchemy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" />          
+  </div>
+</section>
+  
+<section id="projects" class="projects">
+  <h2>02. Projects. </h2>
+  <p class="central reveal">Click on a project below to find out more about the work I have produced to date:</p>
+  <div class="post-container">
+    {% for post in posts %}
+    <a href="{{ url_for('post', post_id=post.id) }}" class="post reveal">
+      <p class="post-title">
+        {{ post.title }}
+      </p> 
+      <div class="project-content-home">
+        <p class="wrapper">{{ post.content }}</p>
+      </div>
+      <br><br>
+      <p class="technologies">{{ post.technologies }}</p>
+    <a>  
+    {% endfor %} 
+  </div>
+  <br>
+  <div class="button-container reveal">
+    <h4>Hold tight, more work coming soon.. </h4>
+    <br>
+    <a href="{{ url_for('projects') }}" class="btn btn-outline-primary"> View all projects </a>
+  </div>
+</section>
+
+<section id="work" class="work">
+  <h2>03. Work and Experience. </h2>
+
+  <div class="tab reveal">
+    <button>Work</button>
+      <div class="exp-content">
+        {% for exp in experience %}
+          {% if exp.exp_type == 'Work' %}
+            <h3>{{ exp.place }}</h3>
+            <h4>{{ exp.role }}</h4>
+            <p>{{ exp.dates }}</p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    <button>Education</button>
+      <div class="exp-content">
+        {% for exp in experience %}
+          {% if exp.exp_type == 'Education' %}
+            <h3>{{ exp.place }}</h3>
+            <h4>{{ exp.role }}</h4>
+            <p>{{ exp.dates }}</p>
+          {% endif %}
+        {% endfor %}
+  </div>
+  
+  <div class="center reveal">
+    
+  </div>
+  <div class="button-container reveal">
+    <h4>Click below to find out more or download a copy of my CV:</h4>
+    <div class="row">
+      <div class="col-auto">
+        <a href="{{ url_for('work') }}" class="btn btn-outline-primary"> Find out more </a>
+      </div>
+      <div class="col-auto">
+        <a id="cv-button" href="/static/cv.pdf"  target="_blank" class="btn btn-outline-primary">CV</a>
+      </div>
+    </div>  
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>04. Get in touch. </h2>
+  <h3 class="reveal">Feel free to drop me a message here.</h3>
+  
+
+  <form id="contact-form" method="post" action="/contact/sent" class="reveal">
+      <label for="email">Email: *</label>
+      <input type="email" id="email" name="email"><br>
+      <label for="message">Message: *</label>
+      <textarea id="message" name="message"></textarea><br>
+      <input class="btn btn-outline-primary" type="submit" value="Submit">
+  </form> 
+  <br>
+
+  <div class="container central">
+    <a class="nav-list-item" title="Go to top" href="#top"> back to top
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+      </svg>   
+    </a>
+  </div>
+
+</section>
+{% endblock content %}

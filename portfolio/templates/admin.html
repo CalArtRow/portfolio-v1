@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-container">
+    
+    <h1>Admin Area</h1>
+    <p>Edit the portfolio content here...</p>
+    <br>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('add_project') }}" class="btn btn-outline-primary">Add/Delete Projects</a>
+        <a href="{{ url_for('add_work') }}" class="btn btn-outline-primary">Add/Delete Experience</a>
+        <a href="{{ url_for('edit_about', id=about.id) }}" class="btn btn-outline-primary">Edit About Me</a> 
+        <br><br><br>       
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-warning"> Logout </a>
+    {% endif %}
+
+    {% if not current_user.is_authenticated %}
+   <form method="POST" action="">
+        {{ form.csrf_token }}
+        <p>{{ form.username.label }} {{ form.username }}</p>
+        <p>{{ form.password.label }} {{ form.password }}</p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock content %}

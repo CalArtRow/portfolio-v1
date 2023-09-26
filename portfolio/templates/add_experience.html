@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-container">
+    
+    <h2>Add experience info</h2>
+    <br>
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <form method="POST">
+            {{ form.csrf_token }}
+            <div class="mb-3">
+                <label for="{{ form.where.id }}">{{ form.where.label }}</label>
+                {{ form.where(class="form-control", id="form-add-new-input", placeholder="Cardiff University, Structural Soils etc. ...") }}
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="{{ form.exp_type.id }}">{{ form.exp_type.label }}</label>
+                {{ form.exp_type(class="form-control", id="form-add-new-input", placeholder="'Work' or 'Eductation'...") }}
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="{{ form.dates.id }}">{{ form.dates.label }}</label>
+                {{ form.dates(class="form-control", id="form-add-new-input", placeholder="'Month' 'Year' - 'Month' 'Year' ...") }}
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="{{ form.description.id }}">{{ form.description.label }}  </label>
+                {{ form.description(class="form-control", id="form-add-new-input", placeholder="Write a summary here...") }}
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="{{ form.role.id }}">{{ form.role.label }}</label>
+                {{ form.role(class="form-control", id="form-add-new-input", placeholder="'BSc Geology' or 'Ground Engineer' etc...") }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.start_date.id }}">{{ form.start_date.label }}</label>
+                {{ form.start_date(class="form-control", id="form-add-new-input") }}
+            </div>
+            <br>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+    <h2>Delete experience info: </h2>
+    <br>
+    <div class="container">
+    <table class="table table-hover">
+        {% for experience in our_experiences %}
+        <tr>
+            <td> {{ experience.dates }} </td>
+            <td> {{ experience.exp_type }} </td>
+            <td> {{ experience.place }} </td>
+            <td> {{ experience.role }} </td> 
+            <td> 
+              <a class="btn btn-outline-danger btn-sm" id="delete" onclick="return checkDelete()" href="{{ url_for('delete_work', id=experience.id) }}"> Delete </a> 
+            </td>
+        </tr>
+        {% endfor %}
+    </table>    
+    </div>  
+
+    <br><br><br>
+    <div class="container central">
+        <a class="nav-list-item" href="{{ url_for('admin') }}"> back to admin panel
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+        </a>
+    </div>    
+
+</div>
+{% endblock content %}
